@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Create Account - Lions Den Glass</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .signup-page {
+            min-height: 100vh;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(75, 31, 99, 0.1) 0%, rgba(155, 89, 182, 0.1) 100%);
+        }
+        
+        .signup-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .signup-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .signup-header h1 {
+            font-family: 'Lobster', cursive;
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #e84393, #9b59b6, #4b1f63);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .signup-content {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            background-image: linear-gradient(white, white), linear-gradient(90deg, #e84393, #9b59b6, #4b1f63);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+        
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .form-group label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input {
+            padding: 12px 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #e84393;
+            box-shadow: 0 0 0 3px rgba(232, 67, 147, 0.1);
+        }
+        
+        .signup-submit {
+            padding: 14px;
+            background: linear-gradient(90deg, #e84393, #9b59b6, #4b1f63);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 8px;
+        }
+        
+        .signup-submit:hover {
+            background: linear-gradient(90deg, #9b59b6, #e84393, #4b1f63);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(232, 67, 147, 0.3);
+        }
+        
+        .signup-submit:active {
+            transform: translateY(0);
+        }
+        
+        .signup-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 20px;
+        }
+        
+        .signup-footer p {
+            margin: 0;
+        }
+        
+        .signup-footer a {
+            color: #e84393;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        
+        .signup-footer a:hover {
+            color: #9b59b6;
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            padding: 12px;
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            border-radius: 4px;
+            color: #c62828;
+            font-size: 0.9rem;
+            display: none;
+            margin-bottom: 16px;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        @media (max-width: 600px) {
+            .signup-content {
+                max-width: 95vw;
+                padding: 28px 20px;
+            }
+            
+            .signup-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <!-- HEADER (simplified) -->
+    <header class="site-header">
+        <div class="header-left desktop-only">
+            <a href="../index.html" class="logo-link" aria-label="Go to Home">
+                <img src="../assets/images/lions-den-logo.png" alt="Lions Den Logo" class="logo">
+            </a>
+        </div>
+    </header>
+    
+    <!-- SIGNUP PAGE -->
+    <main class="signup-page">
+        <div class="signup-container">
+            <div class="signup-header">
+                <h1>Create Account</h1>
+                <p>Join the Lions Den community</p>
+            </div>
+            
+            <div class="signup-content">
+                <div class="error-message" id="errorMessage"></div>
+                
+                <form class="signup-form" id="signupForm">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    
+                    <button type="submit" class="signup-submit">Create Account</button>
+                </form>
+                
+                <div class="signup-footer">
+                    <p>Already have an account? <a href="../index.html">Sign in</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="../assets/js/signup.js"></script>
+</body>
+</html>
