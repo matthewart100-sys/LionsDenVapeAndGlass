@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="background-overlay"></div>
+        <div class="background-overlay"></div>
     <!-- ================= HEADER ================= -->
     <header class="site-header">
         <!-- MOBILE HEADER (<=800px) -->
@@ -26,12 +26,12 @@
             </a>
             <div class="mobile-icons">
                 <div class="profile-dropdown-wrapper">
-                    <button class="icon-link profile-icon-btn" aria-label="Profile Menu" type="button">
-                        <img src="assets/images/user-icon.png" alt="My Account" class="header-icon">
+                    <button class="icon-link profile-icon-btn" aria-label="Account Menu" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="profileDropdownMenuMobile" tabindex="0">
+                        <img src="assets/images/user-icon.png" alt="Account" class="header-icon">
                     </button>
-                    <div class="profile-dropdown-menu">
-                        <a href="#" class="my-account-link">My Account</a>
-                        <a href="signup.html" class="create-account-link">Create Account</a>
+                    <div class="profile-dropdown-menu" id="profileDropdownMenuMobile" role="menu" aria-labelledby="profileDropdownBtnMobile" tabindex="-1">
+                        <a href="#" class="my-account-link" role="menuitem" tabindex="0">My Account</a>
+                        <a href="signup.html" class="create-account-link" role="menuitem" tabindex="0">Create Account</a>
                     </div>
                 </div>
                 <a href="cart.html" class="icon-link" aria-label="Shopping Cart">
@@ -100,12 +100,12 @@
         </div>
         <div class="header-right desktop-only">
             <div class="profile-dropdown-wrapper">
-                <button class="icon-link profile-icon-btn" aria-label="Profile Menu" type="button">
-                    <img src="assets/images/user-icon.png" alt="My Account" class="header-icon">
+                <button class="icon-link profile-icon-btn" aria-label="Account Menu" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="profileDropdownMenuDesktop" tabindex="0">
+                    <img src="assets/images/user-icon.png" alt="Account" class="header-icon">
                 </button>
-                <div class="profile-dropdown-menu">
-                    <a href="#">My Account</a>
-                    <a href="signup.html" class="create-account-link" onclick="openSignup()">Create Account</a>
+                <div class="profile-dropdown-menu" id="profileDropdownMenuDesktop" role="menu" aria-labelledby="profileDropdownBtnDesktop" tabindex="-1">
+                    <a href="#" class="my-account-link" role="menuitem" tabindex="0">My Account</a>
+                    <a href="signup.html" class="create-account-link" role="menuitem" tabindex="0">Create Account</a>
                 </div>
             </div>
             <a href="#" class="icon-link" aria-label="Language Selection">
@@ -195,5 +195,9 @@
     <script src="assets/js/script.js"></script>
     <script src="assets/js/forceProductsVisible.js"></script>
     <script src="assets/js/mobileMenu.js"></script>
+    <script src="assets/js/loginModalEnhance.js"></script>
+    <script src="assets/js/loginModalFallback.js"></script>
+    <script src="assets/js/loginModalAmdUX.js"></script>
+    <script src="assets/js/profileDropdown.js"></script>
 </body>
 </html>
