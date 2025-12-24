@@ -5,7 +5,7 @@
     }
 }
 /* === PROFILE DROPDOWN === */
-.profile-dropdown-wrapper {
+    min-height: 140px !important; padding: 0 2px !important; font-size: 1.176rem !important; 
     position: relative;
     display: inline-block;
 }
