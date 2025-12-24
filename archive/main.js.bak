@@ -1,0 +1,178 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const productsSection = document.querySelector(".products-section");
+
+    if (!productsSection) return;
+
+    const observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    productsSection.classList.add("visible");
+                    observer.unobserve(productsSection);
+                }
+            });
+        },
+        {
+            threshold: 0.2
+        }
+    );
+
+    observer.observe(productsSection);
+
+    // Fade-in shop ad when it scrolls into view
+    const shopAd = document.querySelector('.shop-ad');
+    if (shopAd) {
+        const adObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    shopAd.classList.add('visible');
+                } else {
+                    shopAd.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        adObserver.observe(shopAd);
+    }
+
+    // Overlay fade on scroll: hide when scrolling down, show when scrolling up
+    const overlay = document.querySelector('.hero-overlay');
+    if (overlay) {
+        let lastY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const currentY = window.scrollY;
+            if (Math.abs(currentY - lastY) < 5) return;
+
+            if (currentY > lastY && currentY > 30) {
+                overlay.classList.add('hide-on-scroll');
+                document.body.classList.add('scrolled');
+            } else if (currentY < lastY) {
+                overlay.classList.remove('hide-on-scroll');
+                if (currentY <= 30) document.body.classList.remove('scrolled');
+            }
+
+            lastY = currentY;
+        }, { passive: true });
+    }
+
+    // Background fade-to-black as user scrolls
+    const bgOverlay = document.querySelector('.background-overlay');
+    if (bgOverlay) {
+        const maxFade = 800; // px scrolled until fully black (adjustable)
+        const setBgOpacity = () => {
+            const y = window.scrollY || window.pageYOffset;
+            const t = Math.min(Math.max(y / maxFade, 0), 1);
+            bgOverlay.style.opacity = String(t);
+        };
+
+        // set initial opacity and update on scroll
+        setBgOpacity();
+        window.addEventListener('scroll', setBgOpacity, { passive: true });
+        window.addEventListener('resize', setBgOpacity);
+    }
+
+    // ===== PARALLAX EFFECTS =====
+
+    // Parallax depth effect: move elements based on scroll
+    const parallaxElements = document.querySelectorAll('[data-parallax]');
+    if (parallaxElements.length > 0) {
+        const handleParallax = () => {
+            const y = window.scrollY;
+            parallaxElements.forEach((el) => {
+                const speed = parseFloat(el.getAttribute('data-parallax')) || 0.5;
+                const offset = y * speed;
+                el.style.transform = `translateY(${offset}px)`;
+            });
+        };
+        window.addEventListener('scroll', handleParallax, { passive: true });
+    }
+
+    // Product title and card animations on scroll
+    const productTitles = document.querySelectorAll('.products-title');
+    const productCards = document.querySelectorAll('.product-card');
+
+    const titleObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            }
+        });
+    }, { threshold: 0.3 });
+
+    productTitles.forEach(title => titleObserver.observe(title));
+
+    // Card stagger observer: trigger animation when visible
+    const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, idx) => {
+            if (entry.isIntersecting) {
+                // trigger animation by re-flowing the element
+                entry.target.style.animation = 'none';
+                setTimeout(() => {
+                    entry.target.style.animation = '';
+                }, 10);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    productCards.forEach(card => cardObserver.observe(card));
+
+    // ===== SHOP-AD FOCUS EFFECT =====
+    const shopAdEl = document.querySelector('.shop-ad');
+    if (shopAdEl) {
+        const fg = shopAdEl.querySelector('.shop-ad__fg');
+        const bg = shopAdEl.querySelector('.shop-ad__bg');
+        let lastY = window.scrollY || window.pageYOffset;
+        let focus = 0.5; // 0 -> background focused, 1 -> foreground focused
+        let target = focus;
+
+        const clamp = (v, a=0, b=1) => Math.min(Math.max(v,a),b);
+
+        const updateFocusStyles = (f) => {
+            // interpolate blur and opacity
+            const fgBlur = 8 - 8 * f; // 8 -> 0
+            const bgBlur = 4 + 4 * f; // 4 -> 8
+            const fgOpacity = 0.6 + 0.4 * f; // 0.6 -> 1
+            const bgOpacity = 1 - 0.5 * f; // 1 -> 0.5
+
+            if (fg) fg.style.filter = `blur(${fgBlur}px) contrast(${1 + 0.02 * f})`;
+            if (bg) bg.style.filter = `blur(${bgBlur}px) brightness(${0.9 - 0.1 * f})`;
+            if (fg) fg.style.opacity = String(fgOpacity);
+            if (bg) bg.style.opacity = String(bgOpacity);
+        };
+
+        const rafLoop = () => {
+            // smooth towards target
+            focus += (target - focus) * 0.12;
+            updateFocusStyles(focus);
+            requestAnimationFrame(rafLoop);
+        };
+        requestAnimationFrame(rafLoop);
+
+        const range = 400; // px range over which effect becomes strong
+        const onScroll = () => {
+            const rect = shopAdEl.getBoundingClientRect();
+            const inView = rect.top < window.innerHeight && rect.bottom > 0;
+            const y = window.scrollY || window.pageYOffset;
+            const dirDown = y > lastY;
+
+            // progress 0..1 based on how close the ad is to middle of viewport
+            const center = (rect.top + rect.bottom) / 2 - window.innerHeight / 2;
+            const progress = clamp(1 - Math.abs(center) / (window.innerHeight * 0.8));
+
+            if (inView) {
+                // when scrolling down, move focus toward foreground proportional to progress
+                if (dirDown) target = clamp(0.35 + 0.65 * progress);
+                else target = clamp(0.65 - 0.65 * progress); // when scrolling up, bias toward background
+            } else {
+                // not in view: slowly return to balanced
+                target = 0.5;
+            }
+
+            lastY = y;
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        onScroll();
+    }
+});

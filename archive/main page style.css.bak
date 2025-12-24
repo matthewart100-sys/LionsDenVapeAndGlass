@@ -1,0 +1,230 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body {
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* ===== HEADER ===== */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 70px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 40px;
+    z-index: 1000;
+
+    background: linear-gradient(to right,#e84393, #9b59b6, #4b1f63);
+    border-bottom: 1px solid #111;
+
+}
+
+/* LEFT GROUP */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 28px; /* spacing between logo and nav */
+}
+
+/* LOGO */
+.logo {
+    height: 76px;
+    width: auto;
+    display: block;
+}
+
+/* NAVIGATION */
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.header-nav a {
+    color: white;
+    text-decoration: none;
+
+    font-size: 1rem; /* 13px – Corsair sized */
+    font-weight: 500;
+    letter-spacing: 0.04em;
+
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.2s ease;
+}
+
+/* Hover underline */
+.header-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 1px;
+    background-color: white;
+    transition: width 0.25s ease;
+}
+
+.header-nav a:hover::after {
+    width: 100%;
+}
+
+.header-nav a:hover,
+.nav-button:hover {
+    color: #e6e6e6;
+}
+
+.den-link {
+    font-weight: 600;
+}
+
+/* RIGHT UTILITIES */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-link {
+    color: white;
+    text-decoration: none;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+}
+
+.header-link:hover {
+    color: #e6e6e6;
+}
+
+.language-select {
+    background: transparent;
+    color: white;
+    border: 1px solid #333;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    cursor: pointer;
+}
+
+.language-select option {
+    background: black;
+    color: white;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.icon-button:hover {
+    color: #e6e6e6;
+}
+
+.hero-overlay {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: 98px; /* 140px reduced by 30% */
+    z-index: 900;
+
+    background: rgba(0, 0, 0, 0.66);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    will-change: opacity, transform;
+    pointer-events: auto;
+}
+
+.hero-overlay.hide-on-scroll {
+    opacity: 0;
+    transform: translateY(-12px);
+    pointer-events: none;
+}
+
+.hero {
+    min-height: calc(100vh - 168px); /* full screen minus header (70px) and overlay (98px) */
+    display: flex;
+    align-items: flex-start;
+}
+
+.hero h1 {
+    color: white;
+    font-family: 'Lobster', cursive;
+    font-size: 2.42rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.45rem;
+    color: #ccc;
+}
+
+
+/* Icon link wrapper */
+.icon-link {
+    display: flex;
+    align-items: center;
+}
+
+/* Header icons (user, cart, etc.) */
+.header-icon {
+    height: 50px;        
+    width: auto;
+    opacity: 0.9;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.icon-link:hover .header-icon {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.header-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    pointer-events: auto;
+}
+
+
+/* SEARCH BAR */
+.header-search {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(#e84393, #6f2c91, #4b1f63);
+    border-radius: 999px;
+    padding: 6px 8px 6px 16px;
+    width: 800px;
+    max-width: 100%;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}

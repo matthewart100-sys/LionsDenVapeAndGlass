@@ -1,0 +1,547 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body {
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* ===== HEADER ===== */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 70px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 40px;
+    z-index: 1000;
+
+    background: linear-gradient(to right,#e84393, #9b59b6, #4b1f63);
+    border-bottom: 1px solid #111;
+
+}
+
+/* LEFT GROUP */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 28px; /* spacing between logo and nav */
+}
+
+/* LOGO */
+.logo {
+    height: 76px;
+    width: auto;
+    display: block;
+}
+
+/* NAVIGATION */
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.header-nav a {
+    color: white;
+    text-decoration: none;
+
+    font-size: 1rem; /* 13px – Corsair sized */
+    font-weight: 500;
+    letter-spacing: 0.04em;
+
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.2s ease;
+}
+
+/* Hover underline */
+.header-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 1px;
+    background-color: white;
+    transition: width 0.25s ease;
+}
+
+.header-nav a:hover::after {
+    width: 100%;
+}
+
+.header-nav a:hover,
+.nav-button:hover {
+    color: #e6e6e6;
+}
+
+.den-link {
+    font-weight: 600;
+}
+
+/* RIGHT UTILITIES */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-link {
+    color: white;
+    text-decoration: none;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+}
+
+.header-link:hover {
+    color: #e6e6e6;
+}
+
+.language-select {
+    background: transparent;
+    color: white;
+    border: 1px solid #333;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    cursor: pointer;
+}
+
+.language-select option {
+    background: black;
+    color: white;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.icon-button:hover {
+    color: #e6e6e6;
+}
+
+.hero-overlay {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: 98px; /* 140px reduced by 30% */
+    z-index: 900;
+
+    background: rgba(0, 0, 0, 0.66);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    will-change: opacity, transform;
+    pointer-events: auto;
+}
+
+.hero-overlay.hide-on-scroll {
+    opacity: 0;
+    transform: translateY(-12px);
+    pointer-events: none;
+}
+
+.hero {
+    min-height: calc(100vh - 168px); /* full screen minus header (70px) and overlay (98px) */
+    display: flex;
+    align-items: flex-start;
+}
+
+.hero h1 {
+    color: white;
+    font-family: 'Lobster', cursive;
+    font-size: 2.42rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.45rem;
+    color: #ccc;
+}
+
+
+/* Icon link wrapper */
+.icon-link {
+    display: flex;
+    align-items: center;
+}
+
+/* Header icons (user, cart, etc.) */
+.header-icon {
+    height: 50px;        
+    width: auto;
+    opacity: 0.9;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.icon-link:hover .header-icon {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* ================= HEADER CENTER (SEARCH WRAPPER) ================= */
+
+.header-center {
+    position: absolute;
+    left: 63%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    pointer-events: auto;
+    width: auto;
+}
+
+/* ================= SEARCH BAR ================= */
+
+.header-search {
+    display: flex;
+    align-items: center;
+
+    background: linear-gradient(#e84393, #6f2c91, #4b1f63);
+    border-radius: 999px;
+
+    padding: 6px 8px 6px 16px;
+
+    /* 🔥 RESPONSIVE WIDTH */
+    width: clamp(280px, 50vw, 700px);
+
+    max-width: 100%;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.header-search input {
+    flex: 1;
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: #f2f2f2;
+
+    font-size: 0.95rem;
+    padding-right: 12px;
+}
+
+.header-search input::placeholder {
+    color: #cfc3d9;
+    font-size: 1.16em;
+}
+
+/* SEARCH BUTTON */
+.header-search button {
+    background: linear-gradient(135deg, #2b2b2b, #1f1f1f);
+    border: none;
+    border-radius: 50%;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    padding: 0;
+}
+
+.header-search button img {
+    display: block;
+    height: 40px;
+    width: auto;
+    pointer-events: none;
+}
+
+/* NAV ITEM WRAPPER */
+.nav-item {
+    position: relative;
+}
+
+/* BUTTON STYLE (matches links) */
+.nav-button {
+    background: none;
+    border: none;
+    color: white;
+
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    cursor: pointer;
+    padding: 5px 0;
+    position: relative;
+}
+
+/* DROPDOWN MENU */
+.dropdown-menu {
+    position: absolute;
+    top: 140%;
+    left: 0;
+
+    background: #0f0f0f;
+    border: 1px solid #222;
+    border-radius: 6px;
+
+    min-width: 180px;
+    padding: 8px 0;
+
+    display: none;
+    flex-direction: column;
+    z-index: 999;
+}
+
+/* DROPDOWN LINKS */
+.dropdown-menu a {
+    padding: 10px 16px;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.dropdown-menu a:hover {
+    background: #1a1a1a;
+}
+
+/* SHOW MENU */
+.dropdown.open .dropdown-menu {
+    display: flex;
+}
+
+.arrow {
+    font-size: 1.1rem;
+    line-height: 1;
+    margin-top: 1px;
+
+    transition: transform 0.50s ease; /* smooth rotation */
+}
+
+.nav-button:hover .arrow {
+    transform: rotate(270deg); /* rotate right */
+}
+
+body {
+    background-image: url("lion-graffiti-bg.png");
+    background-size: cover;
+    /* shift image down so both bongs are visible */
+    background-position: center 60%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-top: calc(70px + 140px); /* header + overlay */
+}
+
+.background-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0; /* sit above the page background but behind content */
+
+    background: black; /* overlay to fade the background to black */
+
+    opacity: 0;
+    transition: opacity 0.18s linear;
+    will-change: opacity;
+    pointer-events: none;
+}
+
+/* SHOP AD: fades into view as scrolled */
+
+.shop-ad {
+    position: relative;
+    width: 100vw; /* full-bleed horizontally */
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    margin-bottom: 0; /* flush with white background below */
+    padding: 0;
+
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.shop-ad::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px; /* height of gradient */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.shop-ad img {
+    width: 100%;
+    max-width: none;
+    border-radius: 0; /* make edges flush */
+    display: block;
+}
+
+/* layered shop-ad images */
+.shop-ad__layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.shop-ad__bg {
+    filter: blur(4px) brightness(0.9);
+    transform: scale(1.04);
+    transition: filter 0.2s linear, opacity 0.2s linear, transform 0.25s ease;
+    z-index: 0;
+}
+
+.shop-ad__fg {
+    filter: blur(8px) contrast(1.02);
+    transform: scale(1);
+    transition: filter 0.2s linear, opacity 0.2s linear, transform 0.25s ease;
+    z-index: 2;
+    mix-blend-mode: normal;
+}
+
+.shop-ad.visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* PRODUCTS SECTION */
+
+.products-section {
+    background: white;
+    padding: 0 0 80px; /* remove top padding so white background sits flush with image */
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(60px);
+
+    transition: opacity 0.6s ease, transform 0.6s ease, visibility 0.6s;
+}
+
+/* WHEN VISIBLE */
+.products-section.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* SECTION TITLES */
+.products-section.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* GRID */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 64px;
+}
+
+/* PRODUCT CARDS (PLACEHOLDERS) */
+.product-card {
+    background: #f6f6f6;
+    height: 220px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 600;
+    color: #555;
+}
+
+/* ===== PARALLAX & ANIMATIONS ===== */
+
+/* Parallax depth effect for elements */
+[data-parallax] {
+    transition: transform 0.05s linear;
+}
+
+/* Product card stagger animation */
+.product-card {
+    animation: cardSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes cardSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Stagger each product card */
+.product-card:nth-child(1) { animation-delay: 0.1s; }
+.product-card:nth-child(2) { animation-delay: 0.2s; }
+.product-card:nth-child(3) { animation-delay: 0.3s; }
+.product-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Floating effect for hero overlay text */
+.hero-overlay h1,
+.hero-overlay p {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.hero-overlay h1 { animation-delay: 0s; }
+.hero-overlay p { animation-delay: 0.2s; }
+
+/* Parallax title effect */
+.products-title {
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateX(-15px);
+}
+
+.products-title.in-view {
+    opacity: 1;
+    transform: translateX(0);
+}
