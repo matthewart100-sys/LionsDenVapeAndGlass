@@ -1,1 +1,94 @@
-/* Placeholder for signup.css. Move content from original location here if needed. */
+/* Responsive styles for signup/login forms */
+.signup-container {
+	display: flex;
+	min-height: 100vh;
+	background: #fff;
+}
+.image-panel {
+	flex: 1;
+	background: url('../images/signup-bg.jpg') center/cover no-repeat;
+	min-height: 300px;
+	display: block;
+}
+.form-panel {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 48px 32px;
+	background: #fff;
+}
+.form-panel form {
+	width: 100%;
+	max-width: 340px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+.form-panel input[type="text"],
+.form-panel input[type="email"],
+.form-panel input[type="password"] {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	font-size: 1rem;
+}
+.form-panel button[type="submit"] {
+	padding: 12px;
+	background: linear-gradient(90deg,#e84393,#9b59b6,#4b1f63);
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	font-size: 1.1rem;
+	font-weight: 700;
+	cursor: pointer;
+	margin-top: 8px;
+	transition: background 0.2s;
+}
+.form-panel button[type="submit"]:hover {
+	background: linear-gradient(90deg,#9b59b6,#e84393,#4b1f63);
+}
+.form-panel label {
+	font-size: 1rem;
+	font-weight: 500;
+	margin-bottom: 4px;
+}
+.form-panel .actions {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	align-items: flex-start;
+}
+.form-panel .actions a {
+	color: #4b1f63;
+	text-decoration: underline;
+	font-size: 0.98rem;
+}
+.terms {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 0.95rem;
+}
+
+@media (max-width: 800px) {
+	.signup-container {
+		flex-direction: column;
+		min-height: 100vh;
+	}
+	.image-panel {
+		display: none;
+	}
+	.form-panel {
+		width: 100vw;
+		min-height: 100vh;
+		padding: 32px 8px;
+		box-sizing: border-box;
+	}
+	.form-panel form {
+		max-width: 100vw;
+		padding: 0 2vw;
+	}
+}
