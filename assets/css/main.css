@@ -387,7 +387,7 @@ body.is-mobile .lion-right-img, body.is-mobile .lion-left-img, body.is-mobile .b
     .product-card {
         min-height: 140px;
         padding: 0 2px;
-        font-size: 0.98rem;
+        font-size: 1.176rem; /* 20% larger than 0.98rem */
     }
     .lion-right-img, .lion-left-img {
         display: none;
