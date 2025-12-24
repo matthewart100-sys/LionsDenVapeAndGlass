@@ -204,6 +204,32 @@
             </div>
         </section>
     </main>
+    <!-- SIGN-IN CARD -->
+    <div class="signin-card-overlay" id="signinCardOverlay">
+        <div class="signin-card">
+            <button class="signin-card-close" aria-label="Close sign in">&times;</button>
+            <h2>Sign In</h2>
+            <form class="signin-form">
+                <div class="form-group">
+                    <label for="signin-email">Email Address</label>
+                    <input type="email" id="signin-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signin-password">Password</label>
+                    <input type="password" id="signin-password" name="password" required>
+                </div>
+                <div class="signin-remember">
+                    <input type="checkbox" id="signin-remember" name="remember">
+                    <label for="signin-remember">Remember me</label>
+                </div>
+                <button type="submit" class="signin-submit">Sign In</button>
+            </form>
+            <div class="signin-footer">
+                <p>Don't have an account? <a href="pages/signup.html">Create one</a></p>
+                <p><a href="#">Forgot password?</a></p>
+            </div>
+        </div>
+    </div>
     <!-- ================================================= -->
     <script type="module" src="assets/js/carousel-init.js"></script>
     <script src="assets/js/main.js"></script>
