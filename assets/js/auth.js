@@ -19,6 +19,10 @@
       this.updateUI();
     },
     
+    isAuthenticated: function() {
+      return this.getUser() !== null;
+    },
+    
     updateUI: function() {
       const user = this.getUser();
       // Update UI if user is logged in (you can add a display for this)
@@ -28,9 +32,38 @@
     }
   };
   
+  // Route protection function
+  const routeProtector = {
+    /**
+     * Protect a page - redirects to home if not authenticated
+     * Usage: Call this on page load of protected pages
+     */
+    protectPage: function(redirectUrl = '../index.html') {
+      if (!authManager.isAuthenticated()) {
+        console.warn('Access denied: Not authenticated. Redirecting to login...');
+        window.location.href = redirectUrl;
+        return false;
+      }
+      return true;
+    },
+    
+    /**
+     * Check if user is authenticated
+     */
+    isUserAuthenticated: function() {
+      return authManager.isAuthenticated();
+    },
+    
+    /**
+     * Get current user or null
+     */
+    getCurrentUser: function() {
+      return authManager.getUser();
+    }
+  };
+  
   document.addEventListener('DOMContentLoaded', function() {
     const signinForm = document.querySelector('.signin-form');
-    const signinOverlay = document.getElementById('signinCardOverlay');
     
     if (signinForm) {
       signinForm.addEventListener('submit', handleLogin);
@@ -89,6 +122,11 @@
           }
           // Clear form
           document.querySelector('.signin-form').reset();
+          
+          // Redirect to profile page
+          setTimeout(() => {
+            window.location.href = 'pages/profile.html';
+          }, 500);
         }, 1500);
       } else {
         showMessage(data.error || 'Login failed', 'error');
@@ -171,6 +209,7 @@
     }
   });
   
-  // Export for external use if needed
+  // Export for external use
   window.authManager = authManager;
+  window.routeProtector = routeProtector;
 })();
