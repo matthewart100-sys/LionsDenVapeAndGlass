@@ -1,9 +1,25 @@
 // Profile page route protection and user display
 (function() {
   document.addEventListener('DOMContentLoaded', function() {
-    checkAuthenticationAndLoadProfile();
-    setupLogout();
+    // Wait for authManager to be available (auth.js might still be loading)
+    waitForAuthManager(function() {
+      checkAuthenticationAndLoadProfile();
+      setupLogout();
+    });
   });
+  
+  function waitForAuthManager(callback, attempts = 0) {
+    if (window.authManager) {
+      callback();
+    } else if (attempts < 50) {
+      // Try again after 50ms
+      setTimeout(() => waitForAuthManager(callback, attempts + 1), 50);
+    } else {
+      // Timeout - authManager never loaded
+      console.error('authManager failed to load');
+      showError('Authentication system failed to load.');
+    }
+  }
   
   function checkAuthenticationAndLoadProfile() {
     // Check if user is authenticated in localStorage
