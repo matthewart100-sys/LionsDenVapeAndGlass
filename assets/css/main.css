@@ -2318,6 +2318,7 @@ footer.footer .payment-methods {
     max-width: 1200px;
     margin: 50px auto;
     padding: 0 20px;
+    background: #0a0a0a;
 }
 
 .ad-container {
@@ -2329,18 +2330,20 @@ footer.footer .payment-methods {
 .ad-placeholder {
     width: 100%;
     max-width: 800px;
-    background: linear-gradient(135deg, rgba(232, 67, 147, 0.08) 0%, rgba(155, 89, 182, 0.08) 100%);
-    border: 2px solid rgba(232, 67, 147, 0.3);
+    background: linear-gradient(135deg, #2d1b3d 0%, #1a0f2e 100%);
+    border: 2px solid #e84393;
     border-radius: 12px;
     padding: 40px 30px;
     text-align: center;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(232, 67, 147, 0.2);
 }
 
 .ad-placeholder:hover {
-    background: linear-gradient(135deg, rgba(232, 67, 147, 0.12) 0%, rgba(155, 89, 182, 0.12) 100%);
-    border-color: #e84393;
-    box-shadow: 0 8px 24px rgba(232, 67, 147, 0.15);
+    background: linear-gradient(135deg, #3d2b4d 0%, #2a1f3e 100%);
+    border-color: #ff69b4;
+    box-shadow: 0 8px 32px rgba(232, 67, 147, 0.35);
+    transform: translateY(-4px);
 }
 
 .ad-content {
@@ -2354,11 +2357,12 @@ footer.footer .payment-methods {
     color: #e84393;
     margin: 0;
     font-weight: 700;
+    text-shadow: 0 2px 8px rgba(232, 67, 147, 0.3);
 }
 
 .ad-content p {
     font-size: 1rem;
-    color: #f0f0f0;
+    color: #e0e0e0;
     margin: 0;
 }
 
@@ -2379,18 +2383,25 @@ footer.footer .payment-methods {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(232, 67, 147, 0.3);
 }
 
 .ad-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(232, 67, 147, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(232, 67, 147, 0.5);
+    background: linear-gradient(90deg, #ff69b4, #9b59b6);
 }
 
 .ad-btn:active {
-    transform: translateY(0);
+    transform: translateY(-1px);
 }
 
 @media (max-width: 768px) {
+    .ad-section {
+        margin: 40px auto;
+        padding: 0 16px;
+    }
+    
     .ad-placeholder {
         padding: 30px 20px;
     }
