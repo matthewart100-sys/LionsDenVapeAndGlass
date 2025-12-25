@@ -45,6 +45,7 @@
     // Populate user data
     document.getElementById('userEmail').textContent = user.email;
     document.getElementById('userFullName').textContent = `${user.first_name} ${user.last_name}`;
+    document.getElementById('avatarName').textContent = `${user.first_name} ${user.last_name}`;
     
     // Hide loading text
     loadingText.style.display = 'none';
