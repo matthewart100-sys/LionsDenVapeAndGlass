@@ -2564,3 +2564,193 @@ footer.footer .payment-methods {
         font-size: 1rem;
     }
 }
+
+/* INFINITE SCROLLING SECTION */
+.infinite-scroll-section {
+    width: 100%;
+    padding: 60px 20px;
+    background: linear-gradient(180deg, rgba(75, 31, 99, 0.05) 0%, rgba(155, 89, 182, 0.05) 100%);
+}
+
+.infinite-scroll-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto 40px;
+}
+
+.infinite-scroll-card {
+    height: 300px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.infinite-scroll-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.infinite-scroll-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.infinite-scroll-card:hover::before {
+    left: 100%;
+}
+
+.card-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.3);
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+.card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card-content h3 {
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin: 0;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.card-content p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+.card-action-btn {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-action-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.05);
+}
+
+#loader {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto 40px;
+}
+
+.skeleton-card {
+    height: 300px;
+    border-radius: 12px;
+    background-color: #eaeaea;
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0));
+    animation: load 1s infinite;
+}
+
+@keyframes load {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+    .skeleton-card::after {
+        animation: none;
+    }
+}
+
+.card-actions {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.1rem;
+    color: #d0d0d0;
+    font-weight: 500;
+}
+
+.card-actions span {
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .card-container,
+    #loader {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    
+    .infinite-scroll-card {
+        height: 220px;
+    }
+    
+    .skeleton-card {
+        height: 220px;
+    }
+    
+    .card-number {
+        font-size: 2rem;
+    }
+    
+    .card-content h3 {
+        font-size: 1.1rem;
+    }
+    
+    .infinite-scroll-section h2 {
+        font-size: 1.5rem;
+    }
+}

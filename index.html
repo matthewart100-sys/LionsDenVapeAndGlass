@@ -213,6 +213,23 @@
                 <button class="ad-btn">Shop Now</button>
             </div>
         </section>
+
+        <!-- INFINITE SCROLLING SECTION -->
+        <section class="infinite-scroll-section">
+            <h2>Explore More Products</h2>
+            <div id="card-container" class="card-container"></div>
+            <div id="loader" class="loader">
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
+            <div class="card-actions">
+                <span>Showing <span id="card-count">0</span> of <span id="card-total">0</span> products</span>
+            </div>
+        </section>
     </main>
     <!-- SIGN-IN CARD -->
     <div class="signin-card-overlay" id="signinCardOverlay">
@@ -253,5 +270,6 @@
     <script src="assets/js/auth.js"></script>
     <script src="assets/js/cart.js"></script>
     <script src="assets/js/productDetailModal.js"></script>
+    <script src="assets/js/infinite-scroll.js"></script>
 </body>
 </html>
