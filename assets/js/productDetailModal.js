@@ -57,7 +57,22 @@
         const addCartBtn = modal.querySelector('.btn-add-cart');
         if (addCartBtn) {
           addCartBtn.addEventListener('click', function() {
-            alert(`Product #${productId} added to cart! (Feature coming soon)`);
+            const productId = parseInt(this.dataset.productId);
+            // Fetch product details to get name and category
+            fetch(`http://localhost:5000/api/products/${productId}`)
+              .then(res => res.json())
+              .then(data => {
+                if (data.success && window.CartManager) {
+                  const product = data.product;
+                  window.CartManager.addItem(
+                    productId,
+                    product.name,
+                    product.price,
+                    product.category
+                  );
+                }
+              })
+              .catch(err => console.error('Error adding to cart:', err));
           });
         }
         
