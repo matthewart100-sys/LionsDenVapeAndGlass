@@ -19,3 +19,5 @@ python app.py
 
 echo ""
 echo "Server stopped."
+
+backend/start_dev_5500.bat

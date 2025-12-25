@@ -9,17 +9,180 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        .page-container { max-width: 1200px; margin: 100px auto 50px; padding: 40px 20px; min-height: 60vh; }
-        .page-header { text-align: center; margin-bottom: 40px; }
-        .page-header h1 { font-family: 'Lobster', cursive; font-size: 3rem; background: linear-gradient(90deg, #e84393, #9b59b6, #4b1f63); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .page-header p { color: #666; font-size: 1.1rem; margin-top: 10px; }
-        .contact-form { max-width: 600px; margin: 40px auto; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 700; color: #333; }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-family: inherit; font-size: 1rem; transition: border-color 0.3s; }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #e84393; }
-        .submit-btn { width: 100%; background: linear-gradient(135deg, #e84393, #9b59b6, #4b1f63); color: white; padding: 15px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
-        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(232, 67, 147, 0.4); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            background: 
+                linear-gradient(135deg, #4b1f63 0%, #6a3a7c 25%, #7a2d6b 50%, #9b59b6 75%, #4b1f63 100%) fixed;
+            background-attachment: fixed;
+            min-height: 100%;
+        }
+        
+        .contact-page {
+            min-height: calc(100vh - 80px);
+            padding: 60px 20px;
+            position: relative;
+            overflow: visible;
+        }
+        
+        .site-header {
+            border-bottom: none !important;
+        }
+        
+        .contact-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(232, 67, 147, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 10%, rgba(155, 89, 182, 0.1) 0%, transparent 35%),
+                radial-gradient(circle at 50% 100%, rgba(232, 67, 147, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 0% 80%, rgba(75, 31, 99, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .contact-page::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 255, 255, 0.02) 2px,
+                    rgba(255, 255, 255, 0.02) 4px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            margin-top: -200px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .contact-header h1 {
+            font-family: 'Lobster', cursive;
+            font-size: 3.5rem;
+            background: linear-gradient(90deg, #e84393 0%, #9b59b6 50%, #4b1f63 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .contact-header p {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 0;
+        }
+        
+        .contact-header-divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #e84393, #9b59b6, #4b1f63);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 2px solid transparent;
+            background-image: linear-gradient(white, white), linear-gradient(135deg, #e84393, #9b59b6, #4b1f63);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .contact-card:hover {
+            box-shadow: 0 20px 50px rgba(232, 67, 147, 0.15);
+            transform: translateY(-5px);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #4b1f63;
+            font-size: 1rem;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #e84393;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(232, 67, 147, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #e84393, #9b59b6, #4b1f63);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(232, 67, 147, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -36,67 +199,112 @@
                         <a href="pages/signup.html" class="create-account-link" role="menuitem" tabindex="0">Create Account</a>
                     </div>
                 </div>
-                <a href="cart.html" class="icon-link" aria-label="Shopping Cart"><img src="assets/images/cart-icon.png" alt="Cart" class="header-icon"></a>
+                <a href="pages/cart.html" class="icon-link" aria-label="Shopping Cart"><img src="assets/images/cart-icon.png" alt="Cart" class="header-icon"></a>
             </div>
         </div>
         <nav class="mobile-slideout-menu">
             <button class="close-menu" aria-label="Close menu">&times;</button>
-            <a href="index.html">Main Home</a><a href="featured.html">Featured</a><a href="new-arrivals.html">New Arrivals</a><a href="glass.html">Glass</a><a href="vapes.html">Vapes</a><a href="accessories.html">Accessories</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact Us</a><a href="blog.html">Blog</a><a href="den.html" class="den-link">The Den</a>
+            <a href="index.html">Main Home</a><a href="pages/featured.html">Featured</a><a href="pages/new-arrivals.html">New Arrivals</a><a href="pages/glass.html">Glass</a><a href="pages/vapes.html">Vapes</a><a href="pages/accessories.html">Accessories</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact Us</a><a href="blog.html">Blog</a><a href="den.html" class="den-link">The Den</a>
         </nav>
         <div class="header-left desktop-only">
             <a href="index.html" class="logo-link" aria-label="Go to Home"><img src="assets/images/lions-den-logo.png" alt="Lions Den Logo" class="logo"></a>
             <nav class="header-nav">
                 <div class="nav-item dropdown"><button class="nav-button">Home <span class="arrow">⨭</span></button>
-                    <div class="dropdown-menu"><a href="index.html">Main Home</a><a href="featured.html">Featured</a><a href="new-arrivals.html">New Arrivals</a></div>
+                    <div class="dropdown-menu"><a href="index.html">Main Home</a><a href="pages/featured.html">Featured</a><a href="pages/new-arrivals.html">New Arrivals</a></div>
                 </div>
                 <div class="nav-item dropdown"><button class="nav-button">Products <span class="arrow">⨭</span></button>
-                    <div class="dropdown-menu"><a href="glass.html">Glass</a><a href="vapes.html">Vapes</a><a href="accessories.html">Accessories</a></div>
+                    <div class="dropdown-menu"><a href="pages/glass.html">Glass</a><a href="pages/vapes.html">Vapes</a><a href="pages/accessories.html">Accessories</a></div>
                 </div>
-                <a href="reviews.html">Reviews</a><a href="contact.html">Contact Us</a><a href="blog.html">Blog</a><a href="den.html" class="den-link">The Den</a>
+                <div class="nav-item"><a href="reviews.html" class="nav-button">Reviews</a></div>
+                <div class="nav-item"><a href="contact.html" class="nav-button">Contact Us</a></div>
+                <div class="nav-item"><a href="blog.html" class="nav-button">Blog</a></div>
+                <div class="nav-item"><a href="den.html" class="nav-button den-link">The Den</a></div>
             </nav>
-        </div>
-        <div class="header-center desktop-only">
-            <form class="header-search"><input type="text" placeholder="Search..." aria-label="Search"><button type="submit" aria-label="Submit search"><img src="assets/images/search-icon.png" alt="Search"></button></form>
         </div>
         <div class="header-right desktop-only">
             <div class="profile-dropdown-wrapper">
-                <button class="icon-link profile-icon-btn" aria-label="Account Menu" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="profileDropdownMenuDesktop" tabindex="0"><img src="assets/images/user-icon.png" alt="Account" class="header-icon"></button>
-                <div class="profile-dropdown-menu" id="profileDropdownMenuDesktop" role="menu" tabindex="-1">
+                <button class="icon-link profile-icon-btn" aria-label="Account Menu" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="profileDropdownMenu" tabindex="0"><img src="assets/images/user-icon.png" alt="Account" class="header-icon"></button>
+                <div class="profile-dropdown-menu" id="profileDropdownMenu" role="menu" tabindex="-1">
                     <a href="pages/profile.html" class="my-account-link" role="menuitem" tabindex="0">My Account</a>
                     <a href="pages/signup.html" class="create-account-link" role="menuitem" tabindex="0">Create Account</a>
                 </div>
             </div>
-            <a href="#" class="icon-link" aria-label="Language Selection"><img src="assets/images/language-icon.png" alt="Language" class="header-icon"></a>
-            <a href="cart.html" class="icon-link" aria-label="Shopping Cart"><img src="assets/images/cart-icon.png" alt="Cart" class="header-icon"></a>
+            <a href="pages/cart.html" class="icon-link" aria-label="Shopping Cart"><img src="assets/images/cart-icon.png" alt="Cart" class="header-icon"></a>
         </div>
     </header>
-    <main class="page-container">
-        <div class="page-header"><h1>📞 Contact Us</h1><p>We'd love to hear from you</p></div>
-        <form class="contact-form" onsubmit="handleContact(event)">
-            <div class="form-group">
-                <label for="name">Name *</label>
-                <input type="text" id="name" name="name" required>
+    <main>
+        <div class="contact-page">
+            <div class="contact-container">
+                <div class="contact-header">
+                    <h1>Contact Us</h1>
+                    <div class="contact-header-divider"></div>
+                    <p>Get in touch with our team</p>
+                </div>
+                <div class="contact-card">
+                    <form class="contact-form" onsubmit="handleContactSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="email">Email *</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="subject">Subject *</label>
-                <input type="text" id="subject" name="subject" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Message *</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="submit-btn">Send Message</button>
-        </form>
+        </div>
     </main>
-    <script src="assets/js/auth.js"></script><script src="assets/js/profileDropdown.js"></script>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="pages/featured.html">Featured</a></li>
+                    <li><a href="pages/glass.html">Glass</a></li>
+                    <li><a href="pages/vapes.html">Vapes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="pages/profile.html">My Account</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Lions Den Vape & Glass. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="assets/js/mobileMenu.js"></script>
+    <script src="assets/js/profileDropdown.js"></script>
     <script>
-        document.querySelector('.hamburger').addEventListener('click', () => { document.querySelector('.mobile-slideout-menu').classList.toggle('open'); });
-        document.querySelector('.close-menu').addEventListener('click', () => { document.querySelector('.mobile-slideout-menu').classList.toggle('open'); });
-        function handleContact(event) { event.preventDefault(); alert('Thank you for your message! We will get back to you soon.'); event.target.reset(); }
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            event.target.reset();
+        }
     </script>
 </body>
 </html>
