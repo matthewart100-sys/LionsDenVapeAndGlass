@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Reviews - Lions Den Glass</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-container { max-width: 1200px; margin: 100px auto 50px; padding: 40px 20px; min-height: 60vh; }
+        .page-header { text-align: center; margin-bottom: 40px; }
+        .page-header h1 { font-family: 'Lobster', cursive; font-size: 3rem; background: linear-gradient(90deg, #e84393, #9b59b6, #4b1f63); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .page-header p { color: #666; font-size: 1.1rem; margin-top: 10px; }
+        .coming-soon { text-align: center; padding: 80px 20px; }
+        .coming-soon-icon { font-size: 5rem; margin-bottom: 20px; }
+        .coming-soon p { color: #666; font-size: 1.2rem; margin-bottom: 30px; }
+        .btn-back { display: inline-block; background: linear-gradient(135deg, #e84393, #9b59b6, #4b1f63); color: white; padding: 15px 40px; border-radius: 10px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; }
+        .btn-back:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(232, 67, 147, 0.4); }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <header class="site-header">
+        <div class="mobile-header">
+            <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+            <a href="index.html" class="mobile-logo-link" aria-label="Go to Home"><img src="assets/images/lions-den-logo.png" alt="Lions Den Logo" class="mobile-logo"></a>
+            <div class="mobile-icons">
+                <div class="profile-dropdown-wrapper">
+                    <button class="icon-link profile-icon-btn" aria-label="Account Menu" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="profileDropdownMenuMobile" tabindex="0"><img src="assets/images/user-icon.png" alt="Account" class="header-icon"></button>
+                    <div class="profile-dropdown-menu" id="profileDropdownMenuMobile" role="menu" tabindex="-1">
+                        <a href="pages/profile.html" class="my-account-link" role="menuitem" tabindex="0">My Account</a>
+                        <a href="pages/signup.html" class="create-account-link" role="menuitem" tabindex="0">Create Account</a>
+                    </div>
+                </div>
+                <a href="cart.html" class="icon-link" aria-label="Shopping Cart"><img src="assets/images/cart-icon.png" alt="Cart" class="header-icon"></a>
+            </div>
+        </div>
+        <nav class="mobile-slideout-menu">
+            <button class="close-menu" aria-label="Close menu">&times;</button>
+            <a href="index.html">Main Home</a><a href="featured.html">Featured</a><a href="new-arrivals.html">New Arrivals</a><a href="glass.html">Glass</a><a href="vapes.html">Vapes</a><a href="accessories.html">Accessories</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact Us</a><a href="blog.html">Blog</a><a href="den.html" class="den-link">The Den</a>
+        </nav>
+        <div class="header-left desktop-only">
+            <a href="index.html" class="logo-link" aria-label="Go to Home"><img src="assets/images/lions-den-logo.png" alt="Lions Den Logo" class="logo"></a>
+            <nav class="header-nav">
+                <div class="nav-item dropdown"><button class="nav-button">Home <span class="arrow">⨭</span></button>
+                    <div class="dropdown-menu"><a href="index.html">Main Home</a><a href="featured.html">Featured</a><a href="new-arrivals.html">New Arrivals</a></div>
+                </div>
+                <div class="nav-item dropdown"><button class="nav-button">Products <span class="arrow">⨭</span></button>
+                    <div class="dropdown-menu"><a href="glass.html">Glass</a><a href="vapes.html">Vapes</a><a href="accessories.html">Accessories</a></div>
+                </div>
+                <a href="reviews.html">Reviews</a><a href="contact.html">Contact Us</a><a href="blog.html">Blog</a><a href="den.html" class="den-link">The Den</a>
+            </nav>
+        </div>
+        <div class="header-center desktop-only">
+            <form class="header-search"><input type="text" placeholder="Search..." aria-label="Search"><button type="submit" aria-label="Submit search"><img src="assets/images/search-icon.png" alt="Search"></button></form>
+        </div>
+        <div class="header-right desktop-only">
+            <div class="profile-dropdown-wrapper">
+                <button class="icon-link profile-icon-btn" aria-label="Account Menu" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="profileDropdownMenuDesktop" tabindex="0"><img src="assets/images/user-icon.png" alt="Account" class="header-icon"></button>
+                <div class="profile-dropdown-menu" id="profileDropdownMenuDesktop" role="menu" tabindex="-1">
+                    <a href="pages/profile.html" class="my-account-link" role="menuitem" tabindex="0">My Account</a>
+                    <a href="pages/signup.html" class="create-account-link" role="menuitem" tabindex="0">Create Account</a>
+                </div>
+            </div>
+            <a href="#" class="icon-link" aria-label="Language Selection"><img src="assets/images/language-icon.png" alt="Language" class="header-icon"></a>
+            <a href="cart.html" class="icon-link" aria-label="Shopping Cart"><img src="assets/images/cart-icon.png" alt="Cart" class="header-icon"></a>
+        </div>
+    </header>
+    <main class="page-container">
+        <div class="page-header"><h1>⭐ Customer Reviews</h1><p>See what our customers think</p></div>
+        <div class="coming-soon"><div class="coming-soon-icon">📝</div><p>Reviews page coming soon!</p><a href="index.html" class="btn-back">← Back to Home</a></div>
+    </main>
+    <script src="assets/js/auth.js"></script><script src="assets/js/profileDropdown.js"></script>
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', () => { document.querySelector('.mobile-slideout-menu').classList.toggle('open'); });
+        document.querySelector('.close-menu').addEventListener('click', () => { document.querySelector('.mobile-slideout-menu').classList.toggle('open'); });
+    </script>
+</body>
+</html>
