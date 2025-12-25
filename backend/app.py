@@ -1,11 +1,16 @@
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify, session, send_from_directory
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 from datetime import timedelta
 import sqlite3
 
-app = Flask(__name__)
+# Get the parent directory (project root)
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_FOLDER = os.path.join(PROJECT_ROOT, 'assets')
+TEMPLATE_FOLDER = os.path.join(PROJECT_ROOT)
+
+app = Flask(__name__, static_folder=STATIC_FOLDER, static_url_path='/assets')
 
 # Configuration
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-change-in-production')
@@ -338,6 +343,47 @@ def get_product_html(product_id):
     
     except Exception as e:
         return f'<div class="product-detail-error"><p>Error: {str(e)}</p></div>', 500
+
+
+# ===== STATIC FILE SERVING =====
+@app.route('/')
+def index():
+    """Serve the main index page"""
+    return send_from_directory(TEMPLATE_FOLDER, 'index.html')
+
+
+@app.route('/<path:filename>')
+def serve_static(filename):
+    """Serve static files and HTML pages"""
+    # Try to serve from assets folder first
+    assets_path = os.path.join(STATIC_FOLDER, filename)
+    if os.path.isfile(assets_path):
+        return send_from_directory(STATIC_FOLDER, filename)
+    
+    # Try to serve from root directory
+    root_file = os.path.join(TEMPLATE_FOLDER, filename)
+    if os.path.isfile(root_file):
+        return send_from_directory(TEMPLATE_FOLDER, filename)
+    
+    # Try to serve from pages folder
+    pages_path = os.path.join(TEMPLATE_FOLDER, 'pages', filename)
+    if os.path.isfile(pages_path):
+        return send_from_directory(os.path.join(TEMPLATE_FOLDER, 'pages'), filename)
+    
+    # If not found, return 404
+    return {'error': 'File not found'}, 404
+
+
+@app.route('/pages/<path:filename>')
+def serve_pages(filename):
+    """Serve files from pages folder"""
+    pages_folder = os.path.join(TEMPLATE_FOLDER, 'pages')
+    return send_from_directory(pages_folder, filename)
+
+
+if __name__ == '__main__':
+    init_db()
+    app.run(debug=True, host='0.0.0.0', port=5000)
 
 if __name__ == '__main__':
     init_db()
