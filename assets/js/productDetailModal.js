@@ -71,7 +71,7 @@
             }
             
             // Fetch product details to get name and category
-            fetch(`http://localhost:5000/api/products/${productId}`)
+            fetch(`${API_BASE}/api/products/${productId}`)
               .then(res => res.json())
               .then(data => {
                 if (data.success) {
