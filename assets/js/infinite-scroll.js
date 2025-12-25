@@ -22,19 +22,15 @@ const getRandomColor = () => {
   return `hsl(${h}deg, 60%, 50%)`;
 };
 
-// Create a new card element
+// Create a new card element matching product carousel style
 const createCard = (index) => {
   const card = document.createElement("div");
-  card.className = "infinite-scroll-card";
+  card.className = "product-card";
   card.innerHTML = `
-    <div class="card-number">${index}</div>
-    <div class="card-content">
-      <h3>Product #${index}</h3>
-      <p>Premium Quality Item</p>
-      <button class="card-action-btn">View Details</button>
-    </div>
+    <div class="product-label">Product: #${index}</div>
+    <img src="assets/images/bong.png" alt="Product icon" class="product-icon">
+    <div class="product-label product-label-bottom">Price: $$$</div>
   `;
-  card.style.backgroundColor = getRandomColor();
   cardContainer.appendChild(card);
 };
 

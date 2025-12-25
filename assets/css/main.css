@@ -2581,11 +2581,18 @@ footer.footer .payment-methods {
 }
 
 .card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
     max-width: 1400px;
     margin: 0 auto 40px;
+    justify-content: flex-start;
+}
+
+.card-container .product-card {
+    height: auto;
+    width: calc(25% - 9px);
+    min-width: 200px;
 }
 
 .infinite-scroll-card {
@@ -2676,16 +2683,19 @@ footer.footer .payment-methods {
 }
 
 #loader {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
     max-width: 1400px;
     margin: 0 auto 40px;
+    justify-content: flex-start;
 }
 
 .skeleton-card {
-    height: 300px;
-    border-radius: 12px;
+    height: 180px;
+    width: calc(25% - 9px);
+    min-width: 200px;
+    border-radius: 8px;
     background-color: #eaeaea;
     position: relative;
     overflow: hidden;
@@ -2734,20 +2744,17 @@ footer.footer .payment-methods {
         gap: 15px;
     }
     
-    .infinite-scroll-card {
-        height: 220px;
+    .card-container,
+    #loader {
+        flex-direction: column;
+        align-items: stretch;
     }
     
+    .card-container .product-card,
     .skeleton-card {
-        height: 220px;
-    }
-    
-    .card-number {
-        font-size: 2rem;
-    }
-    
-    .card-content h3 {
-        font-size: 1.1rem;
+        width: 100%;
+        min-width: unset;
+        height: 150px;
     }
     
     .infinite-scroll-section h2 {

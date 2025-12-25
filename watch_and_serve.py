@@ -62,7 +62,7 @@ class ReloadHTTPRequestHandler(SimpleHTTPRequestHandler):
         super().end_headers()
         if hasattr(self, 'inject_reload') and self.inject_reload:
             # Inject auto-reload script
-            reload_script = b"""
+            reload_script = """
 <script>
 (function() {
     let lastCheck = Date.now();
