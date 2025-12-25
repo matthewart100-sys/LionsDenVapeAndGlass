@@ -56,13 +56,22 @@
         
         const addCartBtn = modal.querySelector('.btn-add-cart');
         if (addCartBtn) {
-          addCartBtn.addEventListener('click', function() {
+          addCartBtn.addEventListener('click', function(e) {
+            e.preventDefault();
             const productId = parseInt(this.dataset.productId);
+            
+            // Check if CartManager is available
+            if (!window.CartManager) {
+              console.error('CartManager not available');
+              alert('Cart system is loading. Please try again.');
+              return;
+            }
+            
             // Fetch product details to get name and category
             fetch(`http://localhost:5000/api/products/${productId}`)
               .then(res => res.json())
               .then(data => {
-                if (data.success && window.CartManager) {
+                if (data.success) {
                   const product = data.product;
                   window.CartManager.addItem(
                     productId,
@@ -80,7 +89,10 @@
                   );
                 }
               })
-              .catch(err => console.error('Error adding to cart:', err));
+              .catch(err => {
+                console.error('Error adding to cart:', err);
+                alert('Error adding to cart. Please try again.');
+              });
           });
         }
         
