@@ -37,46 +37,6 @@
       });
     });
 
-    // Add sign-in card opening for My Account links
-    document.querySelectorAll('.my-account-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        closeAllDropdowns();
-        if (window.authManager && window.authManager.isAuthenticated()) {
-          // User is logged in, go to profile page
-          window.location.href = 'pages/profile.html';
-        } else {
-          // User is not logged in, open sign-in card
-          openSigninCard();
-        }
-      });
-    });
-
-    // Add navigation for Create Account links
-    document.querySelectorAll('.create-account-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        closeAllDropdowns();
-        window.location.href = 'pages/signup.html';
-      });
-    });
-
-    // Close sign-in card
-    const overlay = document.getElementById('signinCardOverlay');
-    if (overlay) {
-      const closeBtn = overlay.querySelector('.signin-card-close');
-      if (closeBtn) {
-        closeBtn.addEventListener('click', closeSigninCard);
-      }
-      
-      // Close when clicking outside the card
-      overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) {
-          closeSigninCard();
-        }
-      });
-    }
-
     // Close dropdown on outside click
     document.addEventListener('click', function(e) {
       closeAllDropdowns();
@@ -97,20 +57,88 @@
     const user = window.authManager && window.authManager.getUser();
     
     if (isAuthenticated && user) {
-      // User is logged in - update menu items
-      document.querySelectorAll('.my-account-link').forEach(link => {
-        link.textContent = `${user.first_name}'s Profile`;
+      // User is logged in - show authenticated menu
+      document.querySelectorAll('.profile-dropdown-menu').forEach(menu => {
+        menu.innerHTML = `
+          <a href="pages/profile.html" class="profile-menu-item profile-view" role="menuitem" tabindex="0">
+            <span>👤 View Profile</span>
+          </a>
+          <a href="#" class="profile-menu-item profile-settings" role="menuitem" tabindex="0">
+            <span>⚙️ Settings</span>
+          </a>
+          <a href="#" class="profile-menu-item profile-orders" role="menuitem" tabindex="0">
+            <span>📦 My Orders</span>
+          </a>
+          <hr style="margin: 4px 0; border: none; border-top: 1px solid #e0e0e0;">
+          <a href="#" class="profile-menu-item profile-logout" role="menuitem" tabindex="0">
+            <span>🚪 Logout</span>
+          </a>
+        `;
+        
+        // Add event listeners
+        const settingsLink = menu.querySelector('.profile-settings');
+        if (settingsLink) {
+          settingsLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeAllDropdowns();
+            alert('Settings page coming soon!');
+          });
+        }
+        
+        const ordersLink = menu.querySelector('.profile-orders');
+        if (ordersLink) {
+          ordersLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeAllDropdowns();
+            alert('Order history coming soon!');
+          });
+        }
+        
+        const logoutLink = menu.querySelector('.profile-logout');
+        if (logoutLink) {
+          logoutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeAllDropdowns();
+            handleLogout();
+          });
+        }
+        
+        const profileLink = menu.querySelector('.profile-view');
+        if (profileLink) {
+          profileLink.addEventListener('click', function(e) {
+            closeAllDropdowns();
+          });
+        }
       });
-      
-      document.querySelectorAll('.create-account-link').forEach(link => {
-        link.textContent = 'Logout';
-        link.classList.remove('create-account-link');
-        link.classList.add('logout-link');
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          closeAllDropdowns();
-          handleLogout();
-        });
+    } else {
+      // User is not logged in - show sign in menu
+      document.querySelectorAll('.profile-dropdown-menu').forEach(menu => {
+        menu.innerHTML = `
+          <a href="#" class="profile-menu-item my-account-link" role="menuitem" tabindex="0">
+            <span>🔐 Sign In</span>
+          </a>
+          <a href="pages/signup.html" class="profile-menu-item create-account-link" role="menuitem" tabindex="0">
+            <span>✨ Create Account</span>
+          </a>
+        `;
+        
+        // Add event listeners
+        const signInLink = menu.querySelector('.my-account-link');
+        if (signInLink) {
+          signInLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeAllDropdowns();
+            openSigninCard();
+          });
+        }
+        
+        const signUpLink = menu.querySelector('.create-account-link');
+        if (signUpLink) {
+          signUpLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeAllDropdowns();
+          });
+        }
       });
     }
   }
@@ -121,4 +149,11 @@
     }
     window.location.href = 'index.html';
   }
+  
+  // Listen for auth changes and update menu
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'currentUser') {
+      updateDropdownMenu();
+    }
+  });
 })();
