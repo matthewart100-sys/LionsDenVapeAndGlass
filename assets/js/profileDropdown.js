@@ -49,6 +49,22 @@
         closeSigninCard();
       }
     });
+
+    // Close sign-in card on close button click
+    const closeBtn = document.querySelector('.signin-card-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeSigninCard);
+    }
+
+    // Close sign-in card when clicking overlay (outside the card)
+    const overlay = document.getElementById('signinCardOverlay');
+    if (overlay) {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+          closeSigninCard();
+        }
+      });
+    }
   });
   
   function updateDropdownMenu() {
