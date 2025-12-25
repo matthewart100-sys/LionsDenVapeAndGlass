@@ -71,8 +71,13 @@
                     product.category
                   );
                   
-                  // Show cart action buttons
-                  showCartActionButtons();
+                  // Show cart confirmation panel
+                  showCartConfirmation(
+                    productId,
+                    product.name,
+                    product.price,
+                    product.category
+                  );
                 }
               })
               .catch(err => console.error('Error adding to cart:', err));
@@ -100,37 +105,114 @@
     }
   }
   
-  function showCartActionButtons() {
-    const modal = document.getElementById('productDetailModal');
-    if (!modal) return;
+  function showCartConfirmation(productId, productName, productPrice, productCategory) {
+    // Create slide-in panel if it doesn't exist
+    let slidePanel = document.getElementById('cartConfirmationPanel');
+    if (!slidePanel) {
+      slidePanel = document.createElement('div');
+      slidePanel.id = 'cartConfirmationPanel';
+      slidePanel.className = 'cart-confirmation-panel';
+      document.body.appendChild(slidePanel);
+    }
 
-    // Find the product actions div
-    const actionDiv = modal.querySelector('.product-actions');
-    if (!actionDiv) return;
+    // Populate the panel with product info
+    slidePanel.innerHTML = `
+      <div class="cart-confirmation-content">
+        <button class="close-panel-btn" aria-label="Close panel">✕</button>
+        
+        <div class="confirmation-header">
+          <h2>✓ Added to Cart!</h2>
+        </div>
 
-    // Replace with cart success message and action buttons
-    actionDiv.innerHTML = `
-      <div class="cart-success-message">
-        ✓ Added to cart successfully!
-      </div>
-      <div class="cart-action-buttons">
-        <button class="btn-continue-shopping-modal">← Continue Shopping</button>
-        <button class="btn-view-cart-modal">View Cart →</button>
+        <div class="product-summary">
+          <div class="summary-image">
+            <img src="../assets/images/bong.png" alt="${productName}">
+          </div>
+          
+          <div class="summary-details">
+            <div class="summary-category">${productCategory.toUpperCase()}</div>
+            <h3>${productName}</h3>
+            <div class="summary-price">$${productPrice.toFixed(2)}</div>
+            <div class="summary-status">✓ Item added to your cart</div>
+          </div>
+        </div>
+
+        <div class="confirmation-divider"></div>
+
+        <div class="cart-info">
+          <div class="cart-items-count">
+            <span class="info-label">Items in Cart:</span>
+            <span class="info-value" id="cartItemsCount">1</span>
+          </div>
+          <div class="cart-subtotal">
+            <span class="info-label">Subtotal:</span>
+            <span class="info-value" id="cartSubtotal">$${productPrice.toFixed(2)}</span>
+          </div>
+        </div>
+
+        <div class="confirmation-actions">
+          <button class="btn-continue-shopping">← Continue Shopping</button>
+          <button class="btn-view-cart">View Cart →</button>
+        </div>
+
+        <div class="quick-info">
+          <p>🚚 Free shipping on orders over $100</p>
+          <p>✓ Secure checkout</p>
+          <p>📦 Same-day processing</p>
+        </div>
       </div>
     `;
 
+    // Show the panel with animation
+    slidePanel.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
     // Add event listeners
-    const continueBtn = actionDiv.querySelector('.btn-continue-shopping-modal');
-    const viewCartBtn = actionDiv.querySelector('.btn-view-cart-modal');
+    const closeBtn = slidePanel.querySelector('.close-panel-btn');
+    const continueBtn = slidePanel.querySelector('.btn-continue-shopping');
+    const viewCartBtn = slidePanel.querySelector('.btn-view-cart');
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        slidePanel.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
 
     if (continueBtn) {
-      continueBtn.addEventListener('click', closeProductDetail);
+      continueBtn.addEventListener('click', function() {
+        slidePanel.classList.remove('active');
+        document.body.style.overflow = '';
+      });
     }
 
     if (viewCartBtn) {
       viewCartBtn.addEventListener('click', function() {
-        window.location.href = 'pages/cart.html';
+        // Navigate to cart - works from index or pages
+        const currentPath = window.location.pathname;
+        if (currentPath.includes('/pages/')) {
+          window.location.href = 'cart.html';
+        } else {
+          window.location.href = 'pages/cart.html';
+        }
       });
+    }
+
+    // Update cart info
+    updateConfirmationInfo();
+  }
+
+  function updateConfirmationInfo() {
+    if (window.CartManager) {
+      const cart = window.CartManager.getCart();
+      const cartItemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const cartSubtotal = window.CartManager.getTotal();
+
+      const countEl = document.getElementById('cartItemsCount');
+      const subtotalEl = document.getElementById('cartSubtotal');
+
+      if (countEl) countEl.textContent = cartItemsCount;
+      if (subtotalEl) subtotalEl.textContent = `$${cartSubtotal.toFixed(2)}`;
     }
   }
   
