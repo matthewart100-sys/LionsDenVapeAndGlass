@@ -94,6 +94,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     const editProfileBtn = document.getElementById('editProfileBtn');
     const changePasswordBtn = document.getElementById('changePasswordBtn');
+    const viewOrdersBtn = document.getElementById('viewOrdersBtn');
     
     if (editProfileBtn) {
       editProfileBtn.addEventListener('click', function() {
@@ -104,6 +105,12 @@
     if (changePasswordBtn) {
       changePasswordBtn.addEventListener('click', function() {
         alert('Change password functionality coming soon!');
+      });
+    }
+    
+    if (viewOrdersBtn) {
+      viewOrdersBtn.addEventListener('click', function() {
+        alert('Order history coming soon!');
       });
     }
   });
