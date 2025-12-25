@@ -70,6 +70,9 @@
                     product.price,
                     product.category
                   );
+                  
+                  // Show cart action buttons
+                  showCartActionButtons();
                 }
               })
               .catch(err => console.error('Error adding to cart:', err));
@@ -94,6 +97,40 @@
     if (overlay) {
       overlay.classList.remove('active');
       document.body.style.overflow = '';
+    }
+  }
+  
+  function showCartActionButtons() {
+    const modal = document.getElementById('productDetailModal');
+    if (!modal) return;
+
+    // Find the product actions div
+    const actionDiv = modal.querySelector('.product-actions');
+    if (!actionDiv) return;
+
+    // Replace with cart success message and action buttons
+    actionDiv.innerHTML = `
+      <div class="cart-success-message">
+        ✓ Added to cart successfully!
+      </div>
+      <div class="cart-action-buttons">
+        <button class="btn-continue-shopping-modal">← Continue Shopping</button>
+        <button class="btn-view-cart-modal">View Cart →</button>
+      </div>
+    `;
+
+    // Add event listeners
+    const continueBtn = actionDiv.querySelector('.btn-continue-shopping-modal');
+    const viewCartBtn = actionDiv.querySelector('.btn-view-cart-modal');
+
+    if (continueBtn) {
+      continueBtn.addEventListener('click', closeProductDetail);
+    }
+
+    if (viewCartBtn) {
+      viewCartBtn.addEventListener('click', function() {
+        window.location.href = 'pages/cart.html';
+      });
     }
   }
   
