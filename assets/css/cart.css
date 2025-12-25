@@ -1,5 +1,36 @@
 /* SHOPPING CART PAGE STYLES */
 
+/* MAIN CONTENT */
+.main-content {
+    min-height: calc(100vh - 100px);
+    padding-top: 0;
+}
+
+/* PAGE HEADER */
+.page-header {
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, rgba(232, 67, 147, 0.1), rgba(155, 89, 182, 0.1));
+}
+
+.page-header h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, #e84393, #9b59b6, #4b1f63);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.page-header p {
+    color: #666;
+    font-size: 1rem;
+    margin: 0;
+}
+
 .cart-section {
     padding: 40px 20px;
     background: linear-gradient(135deg, rgba(232, 67, 147, 0.05), rgba(155, 89, 182, 0.05));
@@ -432,4 +463,29 @@
         padding: 14px;
         font-size: 1rem;
     }
+}
+
+/* FOOTER STYLES */
+footer.footer {
+    background: linear-gradient(135deg, #0f0f0f, #2d133b);
+    color: white;
+    text-align: center;
+    padding: 24px 20px;
+    font-size: 0.9rem;
+    border-top: 2px solid #e84393;
+    margin-top: 40px;
+}
+
+footer.footer p {
+    margin: 6px 0;
+    opacity: 0.9;
+}
+
+footer.footer p:first-child {
+    font-weight: 500;
+}
+
+footer.footer p:last-child {
+    font-size: 0.85rem;
+    opacity: 0.7;
 }
