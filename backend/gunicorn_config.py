@@ -8,10 +8,10 @@ import multiprocessing
 bind = os.environ.get('BIND', '0.0.0.0:5000')
 backlog = 2048
 
-# Worker processes
-workers = int(os.environ.get('WORKERS', multiprocessing.cpu_count() * 2 + 1))
+# Worker processes (Render free tier: 512MB RAM = 2 workers max)
+workers = int(os.environ.get('WORKERS', min(2, max(1, multiprocessing.cpu_count() - 1))))
 worker_class = 'sync'
-worker_connections = 1000
+worker_connections = 100
 timeout = 30
 keepalive = 2
 
