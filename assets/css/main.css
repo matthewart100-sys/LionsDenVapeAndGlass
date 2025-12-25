@@ -1173,7 +1173,7 @@ html, body {
 /* DROPDOWN MENU */
 .dropdown-menu {
     position: absolute;
-    top: 140%;
+    top: calc(140% + 26px);
     left: 0;
 
     background: #0f0f0f;
