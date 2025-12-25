@@ -1,6 +1,8 @@
 // Signup form handler
 (function() {
-  const API_BASE = 'http://localhost:5000';
+  const API_BASE = window.location.hostname === 'localhost' 
+    ? 'http://localhost:5000' 
+    : window.location.origin;
   
   document.addEventListener('DOMContentLoaded', function() {
     const signupForm = document.getElementById('signupForm');

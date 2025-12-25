@@ -1,6 +1,8 @@
 // Authentication handler for sign-in card
 (function() {
-  const API_BASE = 'http://localhost:5000';
+  const API_BASE = window.location.hostname === 'localhost' 
+    ? 'http://localhost:5000' 
+    : window.location.origin;
   
   // Store user session in localStorage for frontend state
   const authManager = {
