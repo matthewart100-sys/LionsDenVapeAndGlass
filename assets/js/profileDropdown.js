@@ -53,7 +53,17 @@
     // Close sign-in card on close button click
     const closeBtn = document.querySelector('.signin-card-close');
     if (closeBtn) {
-      closeBtn.addEventListener('click', closeSigninCard);
+      closeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeSigninCard();
+      });
+      // Also handle touch for mobile
+      closeBtn.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeSigninCard();
+      });
     }
 
     // Close sign-in card when clicking overlay (outside the card)
@@ -61,6 +71,16 @@
     if (overlay) {
       overlay.addEventListener('click', function(e) {
         if (e.target === overlay) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeSigninCard();
+        }
+      });
+      // Also handle touch for mobile
+      overlay.addEventListener('touchend', function(e) {
+        if (e.target === overlay) {
+          e.preventDefault();
+          e.stopPropagation();
           closeSigninCard();
         }
       });

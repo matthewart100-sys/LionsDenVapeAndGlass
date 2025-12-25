@@ -147,6 +147,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1001;
+    touch-action: manipulation;
 }
 
 .signin-card-close:hover {
