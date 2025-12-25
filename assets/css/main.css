@@ -1183,9 +1183,14 @@ html, body {
     min-width: 180px;
     padding: 8px 0;
 
-    display: none;
+    display: flex;
     flex-direction: column;
     z-index: 999;
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.50s ease;
 }
 
 /* DROPDOWN LINKS */
@@ -1200,9 +1205,20 @@ html, body {
     background: #1a1a1a;
 }
 
-/* SHOW MENU */
+/* SHOW MENU ON HOVER */
+.dropdown:hover .dropdown-menu {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Also show when dropdown has open class (for JS fallback) */
 .dropdown.open .dropdown-menu {
     display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .arrow {
