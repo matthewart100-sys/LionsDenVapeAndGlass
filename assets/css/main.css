@@ -2315,107 +2315,107 @@ footer.footer .payment-methods {
 
 /* ========== AD SECTION STYLES ========== */
 .ad-section {
-    max-width: 1200px;
-    margin: 50px auto;
-    padding: 0 20px;
-    background: #0a0a0a;
-}
-
-.ad-container {
     width: 100%;
+    margin-top: 50px;
+    background: linear-gradient(135deg, #4b1f63 0%, #6a3a7c 25%, #7a2d6b 50%, #9b59b6 75%, #4b1f63 100%);
+    padding: 40px 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.ad-placeholder {
+.ad-card {
     width: 100%;
-    max-width: 800px;
-    background: linear-gradient(135deg, #2d1b3d 0%, #1a0f2e 100%);
-    border: 2px solid #e84393;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
     padding: 40px 30px;
     text-align: center;
+    backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(232, 67, 147, 0.2);
-}
-
-.ad-placeholder:hover {
-    background: linear-gradient(135deg, #3d2b4d 0%, #2a1f3e 100%);
-    border-color: #ff69b4;
-    box-shadow: 0 8px 32px rgba(232, 67, 147, 0.35);
-    transform: translateY(-4px);
-}
-
-.ad-content {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.ad-content h3 {
-    font-size: 1.6rem;
-    color: #e84393;
+.ad-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+    transform: translateY(-4px);
+}
+
+.ad-card h3 {
+    font-size: 1.8rem;
+    color: #ffffff;
     margin: 0;
     font-weight: 700;
-    text-shadow: 0 2px 8px rgba(232, 67, 147, 0.3);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.ad-content p {
-    font-size: 1rem;
-    color: #e0e0e0;
+.ad-card p {
+    font-size: 1.1rem;
+    color: #ffffff;
     margin: 0;
+    font-weight: 500;
 }
 
-.ad-content p strong {
-    color: #e84393;
+.ad-card p strong {
+    color: #ffd700;
     font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 .ad-btn {
     align-self: center;
-    margin-top: 10px;
-    padding: 12px 30px;
-    background: linear-gradient(90deg, #e84393, #9b59b6);
+    margin-top: 15px;
+    padding: 14px 35px;
+    background: rgba(255, 255, 255, 0.2);
     color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    font-size: 1.05rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(232, 67, 147, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .ad-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(232, 67, 147, 0.5);
-    background: linear-gradient(90deg, #ff69b4, #9b59b6);
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 .ad-btn:active {
-    transform: translateY(-1px);
+    transform: translateY(0);
 }
 
 @media (max-width: 768px) {
     .ad-section {
-        margin: 40px auto;
-        padding: 0 16px;
+        padding: 30px 16px;
+        margin-top: 50px;
     }
     
-    .ad-placeholder {
+    .ad-card {
         padding: 30px 20px;
+        gap: 10px;
     }
     
-    .ad-content h3 {
-        font-size: 1.3rem;
+    .ad-card h3 {
+        font-size: 1.4rem;
     }
     
-    .ad-content p {
-        font-size: 0.95rem;
+    .ad-card p {
+        font-size: 1rem;
     }
     
     .ad-btn {
-        padding: 10px 25px;
+        padding: 12px 28px;
         font-size: 0.95rem;
     }
 }
