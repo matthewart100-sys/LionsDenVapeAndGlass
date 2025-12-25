@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured Products - Lion's Den Vape & Glass</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+    <!-- HEADER WITH NAVIGATION -->
+    <header class="header">
+        <div class="logo">🦁 Lion's Den</div>
+        
+        <!-- DESKTOP NAVIGATION -->
+        <nav class="nav-desktop">
+            <div class="nav-item dropdown">
+                <button class="nav-button">
+                    Home
+                    <span class="arrow">⨭</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="../index.html">Main Home</a>
+                    <a href="featured.html">Featured</a>
+                    <a href="new-arrivals.html">New Arrivals</a>
+                </div>
+            </div>
+            
+            <div class="nav-item dropdown">
+                <button class="nav-button">
+                    Products
+                    <span class="arrow">⨭</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="glass.html">Glass</a>
+                    <a href="vapes.html">Vapes</a>
+                    <a href="accessories.html">Accessories</a>
+                </div>
+            </div>
+            
+            <a href="reviews.html" class="nav-link">Reviews</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a href="den.html" class="nav-link">The Den</a>
+        </nav>
+        
+        <!-- DESKTOP PROFILE DROPDOWN -->
+        <div class="profile-dropdown-wrapper">
+            <button class="profile-icon-btn" aria-label="Profile menu">👤</button>
+            <div class="profile-dropdown-menu"></div>
+        </div>
+        
+        <!-- MOBILE HAMBURGER MENU -->
+        <button class="hamburger-menu" id="hamburgerMenu" aria-label="Menu">☰</button>
+    </header>
+
+    <!-- MOBILE SLIDEOUT MENU -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" id="closeMenu">✕</button>
+        
+        <div class="mobile-nav-section">
+            <h3>Home</h3>
+            <a href="../index.html">Main Home</a>
+            <a href="featured.html">Featured</a>
+            <a href="new-arrivals.html">New Arrivals</a>
+        </div>
+        
+        <div class="mobile-nav-section">
+            <h3>Products</h3>
+            <a href="glass.html">Glass</a>
+            <a href="vapes.html">Vapes</a>
+            <a href="accessories.html">Accessories</a>
+        </div>
+        
+        <div class="mobile-nav-section">
+            <h3>More</h3>
+            <a href="reviews.html">Reviews</a>
+            <a href="contact.html">Contact</a>
+            <a href="blog.html">Blog</a>
+            <a href="den.html">The Den</a>
+        </div>
+        
+        <div class="mobile-nav-section">
+            <a href="cart.html" class="cart-link">🛒 Shopping Cart</a>
+        </div>
+    </nav>
+
+    <!-- SIGN-IN CARD -->
+    <div class="signin-card-overlay" id="signinCardOverlay">
+        <div class="signin-card">
+            <button class="signin-card-close" aria-label="Close sign in">&times;</button>
+            <h2>Sign In</h2>
+            <form class="signin-form">
+                <div class="form-group">
+                    <label for="signin-email">Email Address</label>
+                    <input type="email" id="signin-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signin-password">Password</label>
+                    <input type="password" id="signin-password" name="password" required>
+                </div>
+                <div class="signin-remember">
+                    <input type="checkbox" id="signin-remember" name="remember">
+                    <label for="signin-remember">Remember me</label>
+                </div>
+                <button type="submit" class="signin-submit">Sign In</button>
+            </form>
+            <div class="signin-footer">
+                <p>Don't have an account? <a href="signup.html">Create one</a></p>
+                <p><a href="#">Forgot password?</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- PAGE HEADER -->
+        <section class="page-header">
+            <h1>Featured Products</h1>
+            <p>Our hand-picked selection of premium products you'll love</p>
+        </section>
+
+        <!-- PRODUCTS SECTION -->
+        <section class="products-section">
+            <div class="products-container">
+                <h2 class="products-title">Featured Collection</h2>
+                <div class="carousel">
+                    <button class="carousel-arrow left" aria-label="Scroll left">&lt;</button>
+                    <div class="products-grid">
+                        <div class="product-card"><div class="product-label">Premium Glass Bong</div><img src="../assets/images/bong.png" alt="Bong" class="product-icon"><div class="product-label product-label-bottom">$89.99</div></div>
+                        <div class="product-card"><div class="product-label">Portable Vaporizer</div><img src="../assets/images/bong.png" alt="Vape" class="product-icon"><div class="product-label product-label-bottom">$199.99</div></div>
+                        <div class="product-card"><div class="product-label">Cleaning Solution Kit</div><img src="../assets/images/bong.png" alt="Kit" class="product-icon"><div class="product-label product-label-bottom">$24.99</div></div>
+                        <div class="product-card"><div class="product-label">Water Filtration Bong</div><img src="../assets/images/bong.png" alt="Filter Bong" class="product-icon"><div class="product-label product-label-bottom">$129.99</div></div>
+                        <div class="product-card"><div class="product-label">Desktop Vaporizer</div><img src="../assets/images/bong.png" alt="Desktop" class="product-icon"><div class="product-label product-label-bottom">$299.99</div></div>
+                        <div class="product-card"><div class="product-label">Concentrate Rig</div><img src="../assets/images/bong.png" alt="Rig" class="product-icon"><div class="product-label product-label-bottom">$159.99</div></div>
+                        <div class="product-card"><div class="product-label">Custom Bong Stand</div><img src="../assets/images/bong.png" alt="Stand" class="product-icon"><div class="product-label product-label-bottom">$44.99</div></div>
+                        <div class="product-card"><div class="product-label">Mini Glass Bong</div><img src="../assets/images/bong.png" alt="Mini" class="product-icon"><div class="product-label product-label-bottom">$39.99</div></div>
+                    </div>
+                    <button class="carousel-arrow right" aria-label="Scroll right">&gt;</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2024 Lion's Den Vape & Glass. All rights reserved.</p>
+        <p>⚖️ Tobacco Use Only | 🔞 Age Verification Required</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="../assets/js/carousel-init.js" type="module"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/mobileMenu.js"></script>
+    <script src="../assets/js/profileDropdown.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/productDetailModal.js"></script>
+</body>
+</html>

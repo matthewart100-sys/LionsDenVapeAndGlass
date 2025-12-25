@@ -19,9 +19,10 @@ CORS(app, supports_credentials=True, origins=['http://localhost:*', 'https://mat
 
 # Database initialization
 DATABASE = 'users.db'
+PRODUCTS_DB = 'products.db'
 
 def init_db():
-    """Initialize the database with users table"""
+    """Initialize the database with users and products tables"""
     if not os.path.exists(DATABASE):
         conn = sqlite3.connect(DATABASE)
         c = conn.cursor()
@@ -42,10 +43,55 @@ def init_db():
         conn.commit()
         conn.close()
         print(f"Database initialized. Test user: {test_email} / password123")
+    
+    # Initialize products database
+    if not os.path.exists(PRODUCTS_DB):
+        conn = sqlite3.connect(PRODUCTS_DB)
+        c = conn.cursor()
+        c.execute('''CREATE TABLE products
+                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                      name TEXT NOT NULL,
+                      category TEXT NOT NULL,
+                      price REAL NOT NULL,
+                      description TEXT,
+                      image_url TEXT,
+                      in_stock BOOLEAN DEFAULT 1,
+                      rating REAL DEFAULT 0,
+                      reviews INTEGER DEFAULT 0)''')
+        
+        # Add sample products
+        products = [
+            ('Premium Glass Bong', 'glass', 89.99, 'High-quality borosilicate glass bong with ice catcher', 'assets/images/bong.png', 1, 4.8, 45),
+            ('Classic Vape Pen', 'vapes', 49.99, 'Sleek and portable vaporizer for dry herbs and concentrates', 'assets/images/bong.png', 1, 4.6, 32),
+            ('Cleaning Solution Kit', 'accessories', 24.99, 'Premium cleaning solution for pipes and water bongs', 'assets/images/bong.png', 1, 4.9, 58),
+            ('Silicone Grinder', 'accessories', 19.99, 'Non-stick silicone grinder for herbs', 'assets/images/bong.png', 1, 4.7, 41),
+            ('Water Filtration Bong', 'glass', 129.99, 'Advanced water filtration system with percolator', 'assets/images/bong.png', 1, 4.9, 67),
+            ('Portable Vaporizer', 'vapes', 199.99, 'High-end portable vaporizer with precision temperature control', 'assets/images/bong.png', 1, 4.8, 89),
+            ('Glass Storage Jars', 'accessories', 34.99, 'Set of 3 airtight glass storage jars', 'assets/images/bong.png', 1, 4.6, 28),
+            ('Rolling Machine', 'accessories', 12.99, 'Automatic rolling machine for perfect rolls', 'assets/images/bong.png', 1, 4.5, 19),
+            ('Decorative Ashtrays', 'accessories', 29.99, 'Stylish glass ashtrays with designs', 'assets/images/bong.png', 1, 4.4, 15),
+            ('Desktop Vaporizer', 'vapes', 299.99, 'Premium desktop vaporizer with digital controls', 'assets/images/bong.png', 1, 4.9, 112),
+            ('Diffused Downstem', 'accessories', 22.99, 'Replacement diffused downstem for smooth hits', 'assets/images/bong.png', 1, 4.7, 36),
+            ('Custom Bong Stand', 'accessories', 44.99, 'Protective stand for safe storage and display', 'assets/images/bong.png', 1, 4.8, 22),
+            ('Concentrate Rig', 'glass', 159.99, 'Specialized rig for concentrate consumption', 'assets/images/bong.png', 1, 4.8, 54),
+            ('Vape Cleaning Brush Set', 'accessories', 14.99, 'Professional brush set for vaporizer maintenance', 'assets/images/bong.png', 1, 4.6, 24),
+            ('Mini Glass Bong', 'glass', 39.99, 'Compact portable glass bong for travel', 'assets/images/bong.png', 1, 4.5, 31),
+        ]
+        
+        c.executemany('INSERT INTO products (name, category, price, description, image_url, in_stock, rating, reviews) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', products)
+        conn.commit()
+        conn.close()
+        print(f"Products database initialized with {len(products)} products")
 
 def get_db():
     """Get database connection"""
     conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def get_products_db():
+    """Get products database connection"""
+    conn = sqlite3.connect(PRODUCTS_DB)
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -188,6 +234,110 @@ def register():
 def health():
     """Health check endpoint"""
     return jsonify({'status': 'ok'}), 200
+
+@app.route('/api/products/list', methods=['GET'])
+def get_products_list():
+    """Get all products as JSON"""
+    try:
+        conn = get_products_db()
+        c = conn.cursor()
+        c.execute('SELECT * FROM products')
+        products = [dict(row) for row in c.fetchall()]
+        conn.close()
+        return jsonify({'success': True, 'products': products}), 200
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/products/<int:product_id>', methods=['GET'])
+def get_product(product_id):
+    """Get a single product as JSON"""
+    try:
+        conn = get_products_db()
+        c = conn.cursor()
+        c.execute('SELECT * FROM products WHERE id = ?', (product_id,))
+        product = c.fetchone()
+        conn.close()
+        
+        if not product:
+            return jsonify({'success': False, 'error': 'Product not found'}), 404
+        
+        return jsonify({'success': True, 'product': dict(product)}), 200
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/products/html/<int:product_id>', methods=['GET'])
+def get_product_html(product_id):
+    """Return customized HTML content for a product"""
+    try:
+        conn = get_products_db()
+        c = conn.cursor()
+        c.execute('SELECT * FROM products WHERE id = ?', (product_id,))
+        product = c.fetchone()
+        conn.close()
+        
+        if not product:
+            return '<div class="product-detail-error"><p>Product not found</p></div>', 404
+        
+        # Generate customized HTML
+        html_content = f'''
+        <div class="product-detail-container">
+            <div class="product-detail-header">
+                <h1>{product['name']}</h1>
+                <span class="product-category">{product['category'].upper()}</span>
+            </div>
+            
+            <div class="product-detail-body">
+                <div class="product-detail-image">
+                    <img src="{product['image_url']}" alt="{product['name']}" class="product-detail-img">
+                </div>
+                
+                <div class="product-detail-info">
+                    <div class="product-pricing">
+                        <span class="product-price">${product['price']:.2f}</span>
+                        {'<span class="in-stock">✓ In Stock</span>' if product['in_stock'] else '<span class="out-stock">Out of Stock</span>'}
+                    </div>
+                    
+                    <div class="product-rating">
+                        <span class="stars">{'⭐' * int(product['rating'])} {product['rating']}/5</span>
+                        <span class="review-count">({product['reviews']} reviews)</span>
+                    </div>
+                    
+                    <div class="product-description">
+                        <h3>Description</h3>
+                        <p>{product['description']}</p>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="btn-add-cart" data-product-id="{product['id']}">
+                            🛒 Add to Cart
+                        </button>
+                        <button class="btn-wishlist" data-product-id="{product['id']}">
+                            ❤️ Add to Wishlist
+                        </button>
+                    </div>
+                    
+                    <div class="product-specs">
+                        <h3>Product Details</h3>
+                        <ul>
+                            <li><strong>Category:</strong> {product['category']}</li>
+                            <li><strong>Product ID:</strong> #{product['id']}</li>
+                            <li><strong>Availability:</strong> {'In Stock' if product['in_stock'] else 'Out of Stock'}</li>
+                            <li><strong>Customer Rating:</strong> {product['rating']}/5.0</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-detail-footer">
+                <button class="btn-back-to-shop">← Back to Shop</button>
+            </div>
+        </div>
+        '''
+        
+        return html_content, 200, {'Content-Type': 'text/html; charset=utf-8'}
+    
+    except Exception as e:
+        return f'<div class="product-detail-error"><p>Error: {str(e)}</p></div>', 500
 
 if __name__ == '__main__':
     init_db()
