@@ -2319,9 +2319,13 @@ footer.footer .payment-methods {
     margin-top: 50px;
     background: linear-gradient(135deg, #4b1f63 0%, #6a3a7c 25%, #7a2d6b 50%, #9b59b6 75%, #4b1f63 100%);
     padding: 40px 20px;
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 10;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .ad-card {
