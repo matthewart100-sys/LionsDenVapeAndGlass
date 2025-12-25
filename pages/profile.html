@@ -18,7 +18,8 @@
         .profile-page {
             min-height: calc(100vh - 80px);
             padding: 60px 20px;
-            background: linear-gradient(135deg, rgba(75, 31, 99, 0.08) 0%, rgba(155, 89, 182, 0.08) 50%, rgba(232, 67, 147, 0.05) 100%);
+            background: 
+                linear-gradient(135deg, #4b1f63 0%, #6a3a7c 25%, #7a2d6b 50%, #9b59b6 75%, #4b1f63 100%);
             position: relative;
             overflow: hidden;
         }
@@ -30,8 +31,30 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(232, 67, 147, 0.03) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(155, 89, 182, 0.03) 0%, transparent 50%);
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(232, 67, 147, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 10%, rgba(155, 89, 182, 0.1) 0%, transparent 35%),
+                radial-gradient(circle at 50% 100%, rgba(232, 67, 147, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 0% 80%, rgba(75, 31, 99, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .profile-page::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 255, 255, 0.02) 2px,
+                    rgba(255, 255, 255, 0.02) 4px
+                );
             pointer-events: none;
             z-index: 0;
         }
